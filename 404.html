@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lia Cavalcante - XV Anos</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      background-color: #fbcfe8;
+    }
+
+    /* CONTAINER EM TELA CHEIA (FULLSCREEN) */
+    .full-screen-wrapper {
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* =========================================================
+       PÁGINA 1: ENVELOPE (TELA CHEIA)
+       ========================================================= */
+    .page-envelope-wrapper {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #fff0f5 0%, #f7d6e0 60%, #f2bac9 100%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .page-envelope {
+      width: 90%;
+      max-width: 460px;
+      height: 320px;
+      background: linear-gradient(145deg, #f3a8c1, #e88ba9);
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(186, 85, 123, 0.4);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .page-envelope:hover {
+      transform: translateY(-4px);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 230px solid transparent;
+      border-right: 230px solid transparent;
+      border-top: 160px solid #ea7a9e;
+      z-index: 2;
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .envelope-pocket::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 230px solid #e27d9f;
+      border-bottom: 160px solid #d8698d;
+      border-top: 160px solid transparent;
+      opacity: 0.3;
+    }
+
+    .envelope-pocket::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-right: 230px solid #e27d9f;
+      border-bottom: 160px solid #d8698d;
+      border-top: 160px solid transparent;
+      opacity: 0.3;
+    }
+
+    .envelope-seal {
+      position: absolute;
+      z-index: 3;
+      width: 85px;
+      height: 85px;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e6e6e6 60%, #cccccc 100%);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      border: 3px solid #e0e0e0;
+    }
+
+    .seal-text {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #8c1b4f;
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    /* =========================================================
+       PÁGINA 2: SITE COMPLETO EM TELA CHEIA COM FOTO DE FUNDO
+       ========================================================= */
+    .page-site-full {
+      width: 100vw;
+      min-height: 100vh;
+      display: none; /* Oculto inicialmente */
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      
+      /* FOTO DE FUNDO EM TELA CHEIA */
+      background: linear-gradient(rgba(255, 240, 246, 0.75), rgba(255, 240, 246, 0.85)), 
+                  url('fundo.jpeg') top/cover no-repeat fixed;
+      
+      color: #701a75;
+      text-align: center;
+    }
+
+    .content-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
+
+    /* 1. MÚSICA */
+    .music-player-section {
+      padding: 25px 20px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(251, 207, 232, 0.5);
+    }
+
+    .play-btn {
+      width: 70px;
+      height: 70px;
+      background: #be185d;
+      border-radius: 50%;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(190, 24, 93, 0.4);
+      border: none;
+      transition: transform 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .play-btn span {
+      font-size: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* 2. CAPA E MENSAGEM */
+    .hero-section {
+      padding: 40px 20px;
+    }
+
+    .hero-name {
+      font-family: 'Alex Brush', cursive;
+      font-size: 72px;
+      color: #9d174d;
+      line-height: 1.1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 8px;
+      color: #be185d;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .hero-message {
+      font-size: 14px;
+      line-height: 1.8;
+      letter-spacing: 1.5px;
+      color: #831843;
+      font-weight: 600;
+      text-transform: uppercase;
+      max-width: 85%;
+      margin: 0 auto 30px auto;
+    }
+
+    .big-15 {
+      font-family: 'Alex Brush', cursive;
+      font-size: 100px;
+      color: #be185d;
+      line-height: 0.8;
+      margin-bottom: 20px;
+    }
+
+    /* 3. BANNER DATA E LOCAL */
+    .event-info-banner {
+      background: linear-gradient(135deg, rgba(190, 24, 93, 0.9) 0%, rgba(157, 23, 77, 0.9) 100%);
+      color: white;
+      padding: 40px 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      backdrop-filter: blur(5px);
+    }
+
+    .event-date-number {
+      font-size: 72px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .event-date-month {
+      font-family: 'Alex Brush', cursive;
+      font-size: 46px;
+      margin-bottom: 10px;
+    }
+
+    .event-time {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .event-venue {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .event-address {
+      font-size: 11px;
+      line-height: 1.6;
+      opacity: 0.95;
+      max-width: 85%;
+      margin: 0 auto;
+    }
+
+    /* 4. CONTAGEM REGRESSIVA */
+    .countdown-section {
+      padding: 35px 20px;
+    }
+
+    .countdown-title {
+      font-size: 14px;
+      color: #be185d;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #831843;
+    }
+
+    .timer-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timer-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      color: #be185d;
+    }
+
+    /* 5. BOTÕES DE AÇÃO */
+    .actions-section {
+      padding: 30px 20px;
+    }
+
+    .actions-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: #831843;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #be185d;
+    }
+
+    .icon-circle {
+      width: 65px;
+      height: 65px;
+      background: #be185d;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 6px 15px rgba(190, 24, 93, 0.35);
+      margin-bottom: 8px;
+      transition: transform 0.2s;
+    }
+
+    .action-btn:hover .icon-circle {
+      transform: translateY(-3px);
+    }
+
+    .btn-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    /* 6. RODAPÉ */
+    .footer-section {
+      padding: 30px 20px 40px 20px;
+    }
+
+    .footer-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: #be185d;
+      font-weight: 700;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 480px) {
+      .hero-name {
+        font-size: 58px;
+      }
+      .envelope-flap {
+        border-left-width: 50vw;
+        border-right-width: 50vw;
+        border-top-width: 145px;
+      }
+      .envelope-pocket::before, .envelope-pocket::after {
+        border-left-width: 50vw;
+        border-right-width: 50vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="full-screen-wrapper">
+
+    <!-- ================= PÁGINA 1: ENVELOPE (TELA CHEIA) ================= -->
+    <div class="page-envelope-wrapper" id="pageEnvelopeWrapper">
+      <div class="page-envelope" onclick="goToSite()">
+        <div class="envelope-flap"></div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-seal">
+          <div class="seal-text">CLIQUE<br>AQUI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= PÁGINA 2: SITE EM TELA CHEIA ================= -->
+    <div class="page-site-full" id="pageSiteFull">
+      
+      <div class="content-container">
+
+        <!-- 1. PLAYER DE MÚSICA -->
+        <div class="music-player-section">
+          <button class="play-btn" onclick="toggleAudio()">
+            <div id="playIcon">▶</div>
+            <span>TOCAR MÚSICA</span>
+          </button>
+          <audio id="bgMusic" loop>
+            <source src="musiquinha.m4a" type="audio/mpeg">
+          </audio>
+        </div>
+
+        <!-- 2. CAPA E MENSAGEM -->
+        <div class="hero-section">
+          <h1 class="hero-name">Lia Cavalcante</h1>
+          <div class="hero-subtitle">XV ANOS</div>
+
+          <p class="hero-message">
+            Entre sonhos, sorrisos e muitas emoções, chega o dia que sempre esperei.
+            Venham celebrar meus 15 anos e tornar esta noite ainda mais especial.
+          </p>
+
+          <div class="big-15">15 Anos</div>
+        </div>
+
+        <!-- 3. DATA E ENDEREÇO -->
+        <div class="event-info-banner">
+          <div class="event-date-number">06</div>
+          <div class="event-date-month">De Novembro</div>
+          <div class="event-time">ÀS 21H30</div>
+
+          <div class="event-venue">IMPERADOR HALL</div>
+          <div class="event-address">
+            SMPW QUADRA 13 CONJUNTO 03 LOTE 08 PARK WAY<br>
+            BRASÍLIA DF 71741-303 BR, ST. HAB. VICENTE PIRES<br>
+            TAGUATINGA, BRASÍLIA - DF
+          </div>
+        </div>
+
+        <!-- 4. CONTAGEM REGRESSIVA -->
+        <div class="countdown-section">
+          <div class="countdown-title">Contagem regressiva</div>
+          <div class="countdown-timer">
+            <div class="timer-unit"><span id="days">00</span><span class="timer-label">DIAS</span></div> :
+            <div class="timer-unit"><span id="hours">00</span><span class="timer-label">HORAS</span></div> :
+            <div class="timer-unit"><span id="minutes">00</span><span class="timer-label">MINUTOS</span></div> :
+            <div class="timer-unit"><span id="seconds">00</span><span class="timer-label">SEGUNDOS</span></div>
+          </div>
+        </div>
+
+        <!-- 5. BOTÕES DE ACESSO -->
+        <div class="actions-section">
+          <div class="actions-title">TOQUE PARA ACESSAR:</div>
+          <div class="buttons-grid">
+            
+            <a href="https://www.felicitous.com.br/liaxv#lista-presentes" class="action-btn">
+              <div class="icon-circle">🎁</div>
+              <div class="btn-label">Sugestão<br>de Presente</div>
+            </a>
+
+            <a href="https://maps.app.goo.gl/8PRmVkVssKKLKAHS9?g_st=aw" target="_blank" class="action-btn">
+              <div class="icon-circle">📍</div>
+              <div class="btn-label">Como<br>Chegar</div>
+            </a>
+
+            <a href="https://assessoriavip.com.br/rsvpUnico/da3f8770-bb8f-11f1-815e-734c507f0607" target="_blank" class="action-btn">
+              <div class="icon-circle">✓</div>
+              <div class="btn-label">Confirmar<br>Presença</div>
+            </a>
+
+            <a href="DressCode.html" class="action-btn">
+              <div class="icon-circle">👔</div>
+              <div class="btn-label">Dress<br>Code</div>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- 6. RODAPÉ -->
+        <div class="footer-section">
+          <div class="footer-title">ESPERAMOS POR VOCÊ!</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Função de transição
+    function goToSite() {
+      const envelopeWrapper = document.getElementById('pageEnvelopeWrapper');
+      const siteFull = document.getElementById('pageSiteFull');
+
+      envelopeWrapper.style.opacity = '0';
+
+      setTimeout(() => {
+        envelopeWrapper.style.display = 'none';
+        siteFull.style.display = 'block';
+
+        setTimeout(() => {
+          siteFull.style.opacity = '1';
+
+          // Confetes na transição
+          confetti({
+            particleCount: 120,
+            spread: 90,
+            origin: { y: 0.4 },
+            colors: ['#f2bac9', '#be185d', '#d4af37', '#ffffff', '#e88ba9']
+          });
+        }, 50);
+      }, 700);
+    }
+
+    // Player de Áudio
+    function toggleAudio() {
+      const audio = document.getElementById('bgMusic');
+      const icon = document.getElementById('playIcon');
+      if (audio.paused) {
+        audio.play();
+        icon.textContent = '❚❚';
+      } else {
+        audio.pause();
+        icon.textContent = '▶';
+      }
+    }
+
+    // Contagem Regressiva para 06 de Novembro
+    const eventDate = new Date("Nov 6, 2026 21:30:00").getTime();
+
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance > 0) {
+        document.getElementById("days").innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById("hours").innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
