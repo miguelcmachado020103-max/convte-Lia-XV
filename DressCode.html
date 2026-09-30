@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dress Code - Lia Cavalcante XV Anos</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #111111;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 10px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      background: #181818;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 30px 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    /* BOTÃO VOLTAR */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #f472b6;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover {
+      color: #be185d;
+    }
+
+    /* CABEÇALHO */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 20px;
+    }
+
+    .title-main {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      letter-spacing: 3px;
+      color: #ffffff;
+    }
+
+    .title-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      letter-spacing: 4px;
+      color: #d4af37;
+      margin-top: 4px;
+    }
+
+    .badge-style {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .tagline {
+      font-family: 'Alex Brush', cursive;
+      font-size: 28px;
+      color: #f472b6;
+      margin-top: 10px;
+    }
+
+    /* DICAS RÁPIDAS */
+    .quick-tips {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 11px;
+      color: #d4d4d8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    .quick-tips span {
+      display: inline-block;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 2px;
+    }
+
+    /* GRID SEÇÕES (MULHERES / HOMENS) */
+    .sections-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card-gender {
+      background: #222222;
+      border-radius: 12px;
+      padding: 20px 15px;
+      border: 1px solid #333;
+    }
+
+    .gender-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .use-box {
+      background: #1a2e1a;
+      border: 1px solid #2e5d2e;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .use-header {
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .use-text {
+      font-size: 11px;
+      color: #e4e4e7;
+      line-height: 1.5;
+    }
+
+    .item-group {
+      margin-top: 12px;
+    }
+
+    .item-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #f472b6;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .item-desc {
+      font-size: 10px;
+      color: #a1a1aa;
+      line-height: 1.4;
+    }
+
+    /* O QUE EVITAR */
+    .avoid-section {
+      background: #2a181a;
+      border: 1px solid #5c1d24;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .avoid-title {
+      color: #f87171;
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .avoid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 10px;
+      text-align: center;
+    }
+
+    .avoid-item {
+      background: #1c1213;
+      padding: 10px 5px;
+      border-radius: 8px;
+      border: 1px solid #3f1a1d;
+    }
+
+    .avoid-icon {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .avoid-text {
+      font-size: 10px;
+      color: #fca5a5;
+    }
+
+    /* IMAGEM DO GUIA DE INSPIRAÇÃO EXIBIDA DIRETO */
+    .image-guide-section {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .image-guide-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: #d4af37;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #444444;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      background: #000;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* RODAPÉ */
+    .footer-note {
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #333;
+    }
+
+    .footer-quote {
+      font-family: 'Alex Brush', cursive;
+      font-size: 32px;
+      color: #d4af37;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 500px) {
+      .sections-grid {
+        grid-template-columns: 1fr;
+      }
+      .title-main { font-size: 26px; }
+      .title-sub { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <a href="convite.html" class="btn-back">← Voltar ao Convite</a>
+
+    <div class="header">
+      <div class="title-main">DRESS CODE</div>
+      <div class="title-sub">ALL BLACK</div>
+      <div class="badge-style">Esporte Fino</div>
+      <div class="tagline">Elegância em cada detalhe</div>
+    </div>
+
+    <div class="quick-tips">
+      <span>Looks All Black</span>
+      <span>Tecidos Nobres</span>
+      <span>Alfaiataria</span>
+    </div>
+
+    <div class="sections-grid">
+      
+      <div class="card-gender">
+        <div class="gender-title">MULHERES</div>
+        
+        <div class="use-box">
+          <div class="use-header">✓ USE</div>
+          <div class="use-text">Vestidos, macacões, conjuntos ou alfaiataria, sempre na cor preta.</div>
+        </div>
+
+        <div class="item-group">
+          <div class="item-label">✓ Calçados</div>
+          <div class="item-desc">Sandália ou sapato social.</div>
+        </div>
+
+        <div class="item-group">
+          <div class="item-label">✓ Acessórios</div>
+          <div class="item-desc">Bolsas e acessórios discretos e elegantes.</div>
+        </div>
+      </div>
+
+      <div class="card-gender">
+        <div class="gender-title">HOMENS</div>
+        
+        <div class="use-box">
+          <div class="use-header">✓ USE</div>
+          <div class="use-text">Terno, blazer ou camisa social com calça de alfaiataria, sempre na cor preta.</div>
+        </div>
+
+        <div class="item-group">
+          <div class="item-label">✓ Calçados</div>
+          <div class="item-desc">Sapato social preto.</div>
+        </div>
+
+        <div class="item-group">
+          <div class="item-label">✓ Acessórios</div>
+          <div class="item-desc">Relógio e cinto discretos.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="avoid-section">
+      <div class="avoid-title">🚫 EVITE</div>
+      <div class="avoid-grid">
+        <div class="avoid-item">
+          <div class="avoid-icon">👟</div>
+          <div class="avoid-text">Tênis</div>
+        </div>
+        <div class="avoid-item">
+          <div class="avoid-icon">👕</div>
+          <div class="avoid-text">Roupas Esportivas</div>
+        </div>
+        <div class="avoid-item">
+          <div class="avoid-icon">🧢</div>
+          <div class="avoid-text">Boné</div>
+        </div>
+        <div class="avoid-item">
+          <div class="avoid-icon">🎨</div>
+          <div class="avoid-text">Estampas e Logotipos</div>
+        </div>
+        <div class="avoid-item">
+          <div class="avoid-icon">🩳</div>
+          <div class="avoid-text">Bermuda</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-guide-section">
+      <div class="image-guide-title">✦ Guia Ilustrativo de Inspirações ✦</div>
+      <div class="image-wrapper">
+        <img src="dresscode.png" alt="Guia Dress Code All Black - Lia Cavalcante">
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <div style="font-size: 11px; color: #a1a1aa; letter-spacing: 1px;">DÚVIDAS? VÁ DE ELEGÂNCIA.</div>
+      <div class="footer-quote">Nos vemos lá!</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
